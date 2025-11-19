@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Algorithms {
 
-    public static List<Point> stepAlgorithm(int x0, int y0, int x1, int y1) {
+    public static AlgorithmResult stepAlgorithm(int x0, int y0, int x1, int y1) {
         System.out.println("Выполняется пошаговый алгоритм");
         List<Point> points = new ArrayList<>();
+        long startTime = System.nanoTime();
 
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
@@ -41,11 +42,15 @@ public class Algorithms {
                 }
             }
         }
-        return points;
+
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000;
+        return new AlgorithmResult(points, duration);
     }
 
-    public static List<Point> ddaAlgorithm(int x0, int y0, int x1, int y1) {
+    public static AlgorithmResult ddaAlgorithm(int x0, int y0, int x1, int y1) {
         List<Point> points = new ArrayList<>();
+        long startTime = System.nanoTime();
 
         int dx = x1 - x0;
         int dy = y1 - y0;
@@ -62,11 +67,15 @@ public class Algorithms {
             x += xIncrement;
             y += yIncrement;
         }
-        return points;
+
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000;
+        return new AlgorithmResult(points, duration);
     }
 
-    public static List<Point> bresenhamLine(int x0, int y0, int x1, int y1) {
+    public static AlgorithmResult bresenhamLine(int x0, int y0, int x1, int y1) {
         List<Point> points = new ArrayList<>();
+        long startTime = System.nanoTime();
 
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
@@ -88,11 +97,15 @@ public class Algorithms {
                 y0 += sy;
             }
         }
-        return points;
+
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000;
+        return new AlgorithmResult(points, duration);
     }
 
-    public static List<Point> bresenhamCircle(int xc, int yc, int r) {
+    public static AlgorithmResult bresenhamCircle(int xc, int yc, int r) {
         List<Point> points = new ArrayList<>();
+        long startTime = System.nanoTime();
 
         int x = 0;
         int y = r;
@@ -110,7 +123,10 @@ public class Algorithms {
             }
             drawCirclePoints(points, xc, yc, x, y);
         }
-        return points;
+
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000;
+        return new AlgorithmResult(points, duration);
     }
 
     private static void drawCirclePoints(List<Point> points, int xc, int yc, int x, int y) {
